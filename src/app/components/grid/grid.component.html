@@ -1,0 +1,23 @@
+  <div class="grid grid-cols-8 m-4 w-fit bg-slate-100 border border-slate-300 rounded-sm" [ngStyle]="{ 'grid-template-columns': 'repeat(' + COLUMNS + ', minmax(3rem, 6rem))' }">
+  <ng-container *ngFor="let _ of [].constructor(ROWS * COLUMNS), index as i">
+    <div
+      [id]="'cell-' + i"
+      [ngClass]="{
+        'first-col': i % COLUMNS === 0,
+        'last-row': i / COLUMNS >= ROWS - 1,
+        'finish': i === finishPosition,
+        'bg-blue-400 bg-opacity-25 border border-blue-300 hover:border-blue-500 hover:bg-blue-400 hover:bg-opacity-50 cursor-pointer': adjacentCells.indices.has(i),
+        'hover:bg-slate-200 hover:border hover:border-slate-300': !reachedFinish
+      }"
+      class="cell flex justify-center items-center"
+      (click)="movePlayer(i)"
+      >
+      <ng-container *ngIf="i === finishPosition && finishPosition !== (playerPosition[0] + 1) * (playerPosition[1] + 1) - 1">
+        <span class="drop-shadow-md text-4xl">🧀</span>
+      </ng-container>
+      <ng-container *ngIf="i === playerPosition[0] * COLUMNS + playerPosition[1]">
+        <app-player></app-player>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,20 @@
+.cell {
+  /* @apply border border-slate-300; */
+  /* &:not(.first-col) {
+    border-left: 0;
+  }
+  &:not(.last-row) {
+    border-bottom: 0;
+  } */
+  &:before {
+    content: "";
+    display: block;
+    height: 0;
+    width: 0;
+    padding-bottom: calc(100%);
+  }
+}
+
+.grid {
+  grid-template-rows: 1fr;
+}
